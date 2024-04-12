@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:smart_farm/screen/main_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -38,7 +39,6 @@ class LoginScreen extends StatelessWidget {
                     prefixIcon: Icon(Icons.account_box),
                     hintText: "Email or username",
                     labelText: "Email or username"),
-                    
               ),
             ),
             const SizedBox(
@@ -57,6 +57,22 @@ class LoginScreen extends StatelessWidget {
                     prefixIcon: Icon(Icons.lock),
                     hintText: "Password",
                     labelText: "Password"),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => MainScreen()));
+              },
+              child: const Text(
+                'SIGN IN',
+                style: TextStyle(
+                  color: Color(0xFF656565),
+                  decoration: TextDecoration.underline,
+                ),
               ),
             )
           ],
