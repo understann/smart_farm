@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smart_farm/components/long_status_box.dart';
 import 'package:smart_farm/components/status_box.dart';
+import 'package:smart_farm/screen/main_screen.dart';
 
 class StatusRealtime extends StatefulWidget {
   const StatusRealtime({super.key});
@@ -14,9 +15,9 @@ class _StatusRealtimeState extends State<StatusRealtime> {
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.8,
-      child: const Column(
+      child:  Column(
         children: [
-          Row(
+          const Row(
             children: [
               Text(
                 'Status real time',
@@ -28,38 +29,42 @@ class _StatusRealtimeState extends State<StatusRealtime> {
               Icon(Icons.search)
             ],
           ),
-          SizedBox(height: 10,),
+          const SizedBox(
+            height: 10,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              StatusBox(),
-              StatusBox(),
+              StatusBox(statusColor: StatusColors.red.colorValue,sensorValue: '49°',sensorValueUnit: '', sensorLabel: 'Temperature'),
+              StatusBox(statusColor: StatusColors.green.colorValue, sensorValue: '32%',sensorValueUnit: '', sensorLabel: 'Humidity')
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              StatusBox(),
-              StatusBox(),
+              StatusBox(statusColor: StatusColors.green.colorValue,sensorValue: '6.00',sensorValueUnit: 'mS/cm', sensorLabel: 'EC'),
+              StatusBox(statusColor: StatusColors.green.colorValue,
+                  sensorValue: '35000',sensorValueUnit: 'Lux', sensorLabel: 'light intensity'),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              StatusBox(),
-              StatusBox(),
+              StatusBox(statusColor: StatusColors.black.colorValue,sensorValue: '2',sensorValueUnit: '', sensorLabel: 'PH'),
+              StatusBox(
+                  statusColor: StatusColors.black.colorValue,sensorValue: '309',sensorValueUnit: 'ppm', sensorLabel: 'TDS'),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
-          LongStatusBox()
+          const LongStatusBox(mainLabel: 'Tank Water',description: 'max 8 litre',)
         ],
       ),
     );

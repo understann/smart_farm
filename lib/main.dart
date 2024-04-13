@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_farm/bloc/auth_bloc.dart';
 import 'package:smart_farm/screen/login_screen.dart';
 
 void main() {
@@ -10,8 +12,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: LoginScreen()
+    return BlocProvider(
+      create: (context) => AuthBloc(),
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: LoginScreen()
+      ),
     );
   }
 }

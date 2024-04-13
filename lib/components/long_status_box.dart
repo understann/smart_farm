@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class LongStatusBox extends StatelessWidget {
-  const LongStatusBox({super.key});
+  const LongStatusBox({super.key, required this.mainLabel, required this.description});
+
+  final String mainLabel;
+  final String description;
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +37,7 @@ class LongStatusBox extends StatelessWidget {
              Expanded(
               child: Container(
                 padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -41,16 +45,16 @@ class LongStatusBox extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          'Tank Water',
-                          style: TextStyle(
+                          mainLabel,
+                          style: const TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.w800,
                               color: Color(0xFF1B4139)),
                         ),
                         Text(
-                          "max 8 litre",
+                          description,
                           style:
-                              TextStyle(fontSize: 16, color: Color(0xFF1B4139)),
+                              const TextStyle(fontSize: 16, color: Color(0xFF1B4139)),
                         )
                       ],
                     ),
