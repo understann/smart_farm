@@ -12,6 +12,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final inputEmailController = TextEditingController();
+  final inputPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,16 +64,24 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.65,
                 child: TextField(
+                  controller: inputEmailController,
                   decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Color(0xffcdcdcd)),
-                          borderRadius: BorderRadius.circular(15)),
+                        borderSide: const BorderSide(
+                          color: Color(0xffcdcdcd),
+                        ),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
                       focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Color(0xFF47D404)),
-                          borderRadius: BorderRadius.circular(15)),
+                        borderSide: const BorderSide(
+                          color: Color(0xFF47D404),
+                        ),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
                       prefixIcon: const Icon(Icons.account_box),
-                      floatingLabelStyle: const TextStyle(color: Color(0xFF47D404)),
+                      floatingLabelStyle: const TextStyle(
+                        color: Color(0xFF47D404),
+                      ),
                       labelText: "Email or username"),
                 ),
               ),
@@ -81,17 +91,22 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.65,
                 child: TextField(
+                  obscureText: true,
+                  obscuringCharacter: 'x',
+                  controller: inputPasswordController,
                   decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(color: Color(0xffcdcdcd)),
-                          borderRadius: BorderRadius.circular(15)),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Color(0xFF47D404)),
-                          borderRadius: BorderRadius.circular(15)),
-                      prefixIcon: const Icon(Icons.lock),
-                      floatingLabelStyle: const TextStyle(color: Color(0xFF47D404)),
-                      labelText: "Password"),
+
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Color(0xffcdcdcd)),
+                        borderRadius: BorderRadius.circular(15)),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Color(0xFF47D404)),
+                        borderRadius: BorderRadius.circular(15)),
+                    prefixIcon: const Icon(Icons.lock),
+                    floatingLabelStyle:
+                        const TextStyle(color: Color(0xFF47D404)),
+                    labelText: "Password",
+                  ),
                 ),
               ),
               const SizedBox(
@@ -99,6 +114,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               TextButton(
                 onPressed: () {
+                  print('Username : ${inputEmailController.text}');
+                  print('Password : ${inputPasswordController.text}');
                   context.read<AuthBloc>().add(
                         AuthLoginRequested(email: 'asd', password: 'asdadasd'),
                       );
