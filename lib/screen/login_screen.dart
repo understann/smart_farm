@@ -95,7 +95,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   obscuringCharacter: 'x',
                   controller: inputPasswordController,
                   decoration: InputDecoration(
-
                     enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(color: Color(0xffcdcdcd)),
                         borderRadius: BorderRadius.circular(15)),
@@ -117,7 +116,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   print('Username : ${inputEmailController.text}');
                   print('Password : ${inputPasswordController.text}');
                   context.read<AuthBloc>().add(
-                        AuthLoginRequested(email: 'asd', password: 'asdadasd'),
+                        AuthLoginRequested(
+                            email: inputEmailController.text,
+                            password: inputPasswordController.text),
                       );
                 },
                 child: const Text(

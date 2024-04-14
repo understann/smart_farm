@@ -1,35 +1,35 @@
 import 'package:bloc/bloc.dart';
+import 'package:smart_farm/authentication/firebase_auth.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
+
   AuthBloc() : super(AuthInitial()) {
     on<AuthLoginRequested>(_onAuthLoginRequested);
     on<AuthLogoutRequested>(_onAuthLogoutRequested);
   }
 }
 
-void _onAuthLoginRequested(
+Future<void> _onAuthLoginRequested(
     AuthLoginRequested event,
     Emitter<AuthState> emit,
   ) async {
     emit(AuthLoading());
     try {
-      final email = event.email;
-      final password = event.password;
-
-      if (password.length < 6) {
-        return emit(
-          AuthFailure('Password cannot be less than 6 characters!'),
-        );
+      final FirebaseAuthService authService = FirebaseAuthService();
+      final uid = await authService.signInWithEmailAndPassword(
+          email: event.email,
+          password: event.password,
+      );
+      if(uid != null) {
+        emit(AuthSuccess(uid: uid));
+      } else {
+        emit(AuthFailure('Authentication failed'));
       }
-
-      await Future.delayed(const Duration(seconds: 1), () {
-        return emit(AuthSuccess(uid: '$email-$password'));
-      });
     } catch (e) {
-      return emit(AuthFailure(e.toString()));
+      emit(AuthFailure(e.toString()));
     }
   }
 
@@ -39,9 +39,9 @@ void _onAuthLoginRequested(
   ) async {
     emit(AuthLoading());
     try {
-      await Future.delayed(const Duration(seconds: 1), () {
-        return emit(AuthInitial());
-      });
+      final FirebaseAuthService authService = FirebaseAuthService();
+      await authService.signOut();
+      emit(AuthInitial());
     } catch (e) {
       emit(AuthFailure(e.toString()));
     }
