@@ -13,10 +13,10 @@ class CustomDropdown extends StatefulWidget {
   });
 
   @override
-  _CustomDropdownState createState() => _CustomDropdownState();
+  CustomDropdownState createState() => CustomDropdownState();
 }
 
-class _CustomDropdownState extends State<CustomDropdown> {
+class CustomDropdownState extends State<CustomDropdown> {
   @override
   Widget build(BuildContext context) {
     return Container(

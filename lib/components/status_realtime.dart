@@ -34,6 +34,8 @@ class _StatusRealtimeState extends State<StatusRealtime> {
   var valueRange;
   void getValueRange()async {
     valueRange = await retrievePlantRangeData(widget.plant);
+    setState(() {
+    });
   }
   Color plantStatusColor(String status, num value) {
     final maxValue = valueRange['${status}max'] as num;
@@ -54,6 +56,14 @@ class _StatusRealtimeState extends State<StatusRealtime> {
   void initState() {
    getValueRange();
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant StatusRealtime oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.plant != oldWidget.plant) {
+     getValueRange();
+    }
   }
 
   @override
