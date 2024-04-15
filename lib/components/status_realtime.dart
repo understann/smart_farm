@@ -12,9 +12,9 @@ Future<SensorData> readSensorData() async {
   return SensorData.fromSnapshot(snapshot);
 }
 
-Future<Map<Object?, Object?>> retrievePlantRangeData() async {
+Future<Map<Object?, Object?>> retrievePlantRangeData(String plant) async {
   final databaseRef = FirebaseDatabase.instance.ref();
-  final plantSnapshot = await databaseRef.child('plant/green_oak').get();
+  final plantSnapshot = await databaseRef.child('plant/$plant').get();
 
   final plantData = plantSnapshot.value as Map<Object?, Object?>;
   print(plantData);
@@ -22,7 +22,9 @@ Future<Map<Object?, Object?>> retrievePlantRangeData() async {
 }
 
 class StatusRealtime extends StatefulWidget {
-  const StatusRealtime({super.key});
+  const StatusRealtime({super.key, required this.plant});
+
+  final String plant;
 
   @override
   State<StatusRealtime> createState() => _StatusRealtimeState();
@@ -31,7 +33,7 @@ class StatusRealtime extends StatefulWidget {
 class _StatusRealtimeState extends State<StatusRealtime> {
   var valueRange;
   void getValueRange()async {
-    valueRange = await retrievePlantRangeData();
+    valueRange = await retrievePlantRangeData(widget.plant);
   }
   Color plantStatusColor(String status, num value) {
     final maxValue = valueRange['${status}max'] as num;

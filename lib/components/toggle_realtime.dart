@@ -10,8 +10,8 @@ class ToggleRealtime extends StatefulWidget {
 }
 
 class _ToggleRealtimeState extends State<ToggleRealtime> {
-  bool waterPumpStatus = false;
-  bool eneryStatus = false;
+  num waterPumpStatus = 0;
+  num eneryStatus = 0;
 
   final databaseRef = FirebaseDatabase.instance.ref();
   late DatabaseReference ledRef;
@@ -31,14 +31,19 @@ class _ToggleRealtimeState extends State<ToggleRealtime> {
 
     if (ledSnapshot.exists && pumpSnapshot.exists) {
       setState(() {
-        eneryStatus = ledSnapshot.value == '1';
-        waterPumpStatus = pumpSnapshot.value == '1';
+        eneryStatus = ledSnapshot.value as num;
+        waterPumpStatus = pumpSnapshot.value as num;
       });
     }
   }
 
   void toggleWaterPumpStatus() async{
-    final newStatus = !waterPumpStatus;
+    num newStatus;
+    if(waterPumpStatus == 1){
+      newStatus = 0;
+    }else{
+      newStatus = 1;
+    }
     await databaseRef.child('SMF01/actuator/pump').set(newStatus);
     print('toggling water pump');
     setState(() {
@@ -47,8 +52,13 @@ class _ToggleRealtimeState extends State<ToggleRealtime> {
   }
 
   void toggleEnergyStatus() async{
-    final newStatus = !eneryStatus;
-    await databaseRef.child('SMF01/actuator/led').set(newStatus); // Update LED status
+    num newStatus;
+    if(eneryStatus == 1){
+      newStatus = 0;
+    }else{
+      newStatus = 1;
+    }
+    await databaseRef.child('SMF01/actuator/led').set(newStatus);
     print('toggling energy');
     setState(() {
       eneryStatus = newStatus;
@@ -85,7 +95,7 @@ class _ToggleRealtimeState extends State<ToggleRealtime> {
                 },
                 child: StatusToggleButton(
                   buttonLabel: 'Water pump',
-                  buttonStatus: waterPumpStatus,
+                  buttonStatus: waterPumpStatus == 1,
                 ),
               ),
                InkWell(
@@ -94,7 +104,7 @@ class _ToggleRealtimeState extends State<ToggleRealtime> {
                 },
                 child: StatusToggleButton(
                   buttonLabel: 'Energy',
-                  buttonStatus: eneryStatus,
+                  buttonStatus: eneryStatus == 1,
                 ),
               ),
             ],

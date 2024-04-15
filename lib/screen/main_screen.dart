@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -27,10 +28,30 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  String selectedValue = 'Green Oak';
+  String selectedValue = 'green_oak';
   final manualURI = Uri.parse('https://devcommunities.github.io/');
+  final documentNames = <String>[];
 
-  
+  void getPlantDocumentNames() async {
+    final databaseRef = FirebaseDatabase.instance.ref();
+    final plantSnapshot = await databaseRef.child('plant').get();
+
+    if (plantSnapshot.exists) {
+      plantSnapshot.children.forEach((DataSnapshot childSnapshot) {
+        setState(() {
+          documentNames.add(childSnapshot.key!);
+        });
+      });
+    }
+    print(documentNames);
+  }
+
+  @override
+  void initState() {
+    getPlantDocumentNames();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,12 +128,7 @@ class _MainScreenState extends State<MainScreen> {
                       height: 10,
                     ),
                     CustomDropdown(
-                      items: const [
-                        'Green Oak',
-                        'Salad Vegetable',
-                        'Bonsai Tree',
-                        'Glass House'
-                      ],
+                      items: documentNames,
                       value: selectedValue,
                       onChanged: (newValue) {
                         setState(
@@ -125,7 +141,7 @@ class _MainScreenState extends State<MainScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const StatusRealtime(),
+                     StatusRealtime(plant: selectedValue,),
                     const SizedBox(
                       height: 15,
                     ),
