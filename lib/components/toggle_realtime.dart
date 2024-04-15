@@ -1,3 +1,4 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_farm/components/status_toggle_button.dart';
 
@@ -12,17 +13,45 @@ class _ToggleRealtimeState extends State<ToggleRealtime> {
   bool waterPumpStatus = false;
   bool eneryStatus = false;
 
-  void toggleWaterPumpStatus() {
+  final databaseRef = FirebaseDatabase.instance.ref();
+  late DatabaseReference ledRef;
+  late DatabaseReference pumpRef;
+
+  @override
+  void initState() {
+    super.initState();
+    ledRef = databaseRef.child('SMF01/actuator/led');
+    pumpRef = databaseRef.child('SMF01/actuator/pump');
+    _fetchDeviceStates();
+  }
+
+  void _fetchDeviceStates() async {
+    final ledSnapshot = await ledRef.get();
+    final pumpSnapshot = await pumpRef.get();
+
+    if (ledSnapshot.exists && pumpSnapshot.exists) {
+      setState(() {
+        eneryStatus = ledSnapshot.value == '1';
+        waterPumpStatus = pumpSnapshot.value == '1';
+      });
+    }
+  }
+
+  void toggleWaterPumpStatus() async{
+    final newStatus = !waterPumpStatus;
+    await databaseRef.child('SMF01/actuator/pump').set(newStatus);
     print('toggling water pump');
     setState(() {
-      waterPumpStatus = !waterPumpStatus;
+      waterPumpStatus = newStatus;
     });
   }
 
-  void toggleEnergyStatus() {
+  void toggleEnergyStatus() async{
+    final newStatus = !eneryStatus;
+    await databaseRef.child('SMF01/actuator/led').set(newStatus); // Update LED status
     print('toggling energy');
     setState(() {
-      eneryStatus = !eneryStatus;
+      eneryStatus = newStatus;
     });
   }
 
