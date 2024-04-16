@@ -113,7 +113,7 @@ class _MainScreenState extends State<MainScreen> {
                                         fontSize: 40,
                                         color: Color(0xFF1B4139))),
                                 TextSpan(
-                                    text: ' Aorauma',
+                                    text: ' Onuma',
                                     style: TextStyle(
                                         fontSize: 40, color: Colors.black)),
                               ],
