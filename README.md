@@ -1,16 +1,33 @@
-# smart_farm
+# Smart Farm Flutter App
 
-A new Flutter project.
+This repository contains the source code for a Flutter-based smart farming application. This app allows users to monitor real-time sensor data, control actuators, and receive alerts for critical events.
 
-## Getting Started
+## Project Setup
 
-This project is a starting point for a Flutter application.
+**Prerequisites:**
 
-A few resources to get you started if this is your first Flutter project:
+* Flutter SDK (installation instructions: https://flutter.dev/docs/get-started/install)
+* Android Studio or VS Code (with Flutter extension)
+* A Firebase project (https://firebase.google.com/)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+**Steps:**
+first build can takes up to 10min
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. **Clone the Repository:**
+   ```bash
+   git clone [https://github.com/your-username/smart-farm-app.git](https://github.com/your-username/smart-farm-app.git)
+
+2. **Install Dependencies:**
+```
+cd smart-farm-app
+flutter pub get
+
+```
+3. **Config firebase for each platform:**
+- https://firebase.google.com/docs/android/setup
+- https://firebase.google.com/docs/ios/setup
+
+4. **run the app :**
+```
+flutter run
+```
