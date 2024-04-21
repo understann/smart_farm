@@ -4,7 +4,7 @@ class SensorData {
   double ec;
   double humidity;
   int luminousIntensity;
-  int ph;
+  double ph;
   double temperature;
   int waterLevel;
   int tds;
@@ -25,7 +25,7 @@ class SensorData {
       ec: data['EC'] as double,
       humidity: data['humidity'] as double,
       luminousIntensity: data['luminous_intensity'] as int,
-      ph: data['pH'] as int,
+      ph: data['pH'] as double,
       temperature: data['temperature'] as double,
       waterLevel: data['water_level'] as int,
       tds: data['TDS'] as int,

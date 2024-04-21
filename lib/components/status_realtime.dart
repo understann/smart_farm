@@ -19,7 +19,7 @@ Future<Map<Object?, Object?>> retrievePlantRangeData(String plant) async {
   final plantSnapshot = await databaseRef.child('plant/$plant').get();
 
   final plantData = plantSnapshot.value as Map<Object?, Object?>;
-  print('Plant Data : $plantData');
+  // print('Plant Data : $plantData');
   return plantData;
 }
 

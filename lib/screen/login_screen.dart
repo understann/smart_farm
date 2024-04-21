@@ -113,8 +113,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  print('Username : ${inputEmailController.text}');
-                  print('Password : ${inputPasswordController.text}');
+                  // print('Username : ${inputEmailController.text}');
+                  // print('Password : ${inputPasswordController.text}');
                   context.read<AuthBloc>().add(
                         AuthLoginRequested(
                             email: inputEmailController.text,
