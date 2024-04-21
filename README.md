@@ -1,6 +1,6 @@
 # Smart Farm Flutter App
 
-This repository contains the source code for a Flutter-based smart farming application. This app allows users to monitor real-time sensor data, control actuators, and receive alerts for critical events.
+This repository contains the source code for a Flutter-based smart farming application. This app allows users to monitor real-time sensor data and control actuators.
 
 ## Project Setup
 
