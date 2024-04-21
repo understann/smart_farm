@@ -32,11 +32,11 @@ class StatusRealtime extends StatefulWidget {
 
 class _StatusRealtimeState extends State<StatusRealtime> {
   var valueRange;
-  void getValueRange()async {
+  void getValueRange() async {
     valueRange = await retrievePlantRangeData(widget.plant);
-    setState(() {
-    });
+    setState(() {});
   }
+
   Color plantStatusColor(String status, num value) {
     final maxValue = valueRange['${status}max'] as num;
     final minValue = valueRange['${status}min'] as num;
@@ -54,7 +54,7 @@ class _StatusRealtimeState extends State<StatusRealtime> {
 
   @override
   void initState() {
-   getValueRange();
+    getValueRange();
     super.initState();
   }
 
@@ -62,7 +62,7 @@ class _StatusRealtimeState extends State<StatusRealtime> {
   void didUpdateWidget(covariant StatusRealtime oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.plant != oldWidget.plant) {
-     getValueRange();
+      getValueRange();
     }
   }
 
@@ -74,7 +74,13 @@ class _StatusRealtimeState extends State<StatusRealtime> {
             future: readSensorData(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
+                return SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    child: const Center(
+                      child:  CircularProgressIndicator(
+                        color: Color(0xFF47D404),
+                      ),
+                    ));
               } else if (snapshot.hasError) {
                 print(snapshot.error);
                 return Text('Error: ${snapshot.error}');
@@ -101,12 +107,14 @@ class _StatusRealtimeState extends State<StatusRealtime> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         StatusBox(
-                            statusColor:plantStatusColor('temp', data.temperature),
+                            statusColor:
+                                plantStatusColor('temp', data.temperature),
                             sensorValue: '${data.temperature}°',
                             sensorValueUnit: '',
                             sensorLabel: 'Temperature'),
                         StatusBox(
-                            statusColor: plantStatusColor('humidity', data.humidity),
+                            statusColor:
+                                plantStatusColor('humidity', data.humidity),
                             sensorValue: '${data.humidity}%',
                             sensorValueUnit: '',
                             sensorLabel: 'Humidity')
@@ -124,7 +132,8 @@ class _StatusRealtimeState extends State<StatusRealtime> {
                             sensorValueUnit: 'mS/cm',
                             sensorLabel: 'EC'),
                         StatusBox(
-                            statusColor: plantStatusColor('lux', data.luminousIntensity),
+                            statusColor:
+                                plantStatusColor('lux', data.luminousIntensity),
                             sensorValue: '${data.luminousIntensity}',
                             sensorValueUnit: 'Lux',
                             sensorLabel: 'light intensity'),
