@@ -31,7 +31,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   String selectedValue = 'green_oak';
-  final manualURI = Uri.parse('https://devcommunities.github.io/');
+  final manualURI = Uri.parse('https://flutter.dev/');
   final documentNames = <String>[];
 
   void getPlantDocumentNames() async {

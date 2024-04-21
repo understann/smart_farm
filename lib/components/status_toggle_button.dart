@@ -64,16 +64,16 @@ class StatusToggleButton extends StatelessWidget {
                         ),
                       ],
                     )),
-          const Column(
+           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'ON/OFF',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800),
               ),
               Text(
-                'Water pump',
-                style: TextStyle(fontSize: 10),
+                buttonLabel,
+                style: const TextStyle(fontSize: 10),
               )
             ],
           )
