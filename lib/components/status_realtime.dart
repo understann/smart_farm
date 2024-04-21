@@ -87,7 +87,10 @@ class _StatusRealtimeState extends State<StatusRealtime> {
               } else if (snapshot.hasError) {
                 print('Snapshot Data ${snapshot.data}');
                 print('Snapshot Error ${snapshot.error}');
-                return Text('Error: ${snapshot.error}');
+                return AlertDialog(
+                  title: Text('Snapshot Error'),
+                  content: Text(snapshot.error.toString()),
+                );
               } else {
                 final data = snapshot.data!;
                 return Column(

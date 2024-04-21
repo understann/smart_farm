@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_farm/components/status_toggle_button.dart';
@@ -17,12 +19,30 @@ class _ToggleRealtimeState extends State<ToggleRealtime> {
   late DatabaseReference ledRef;
   late DatabaseReference pumpRef;
 
+  late StreamSubscription<DatabaseEvent> _ledDataSubscription;
+  late StreamSubscription<DatabaseEvent> _pumpDataSubscription;
+  final database = FirebaseDatabase.instance.ref();
+
   @override
   void initState() {
     super.initState();
     ledRef = databaseRef.child('SMF01/actuator/led');
     pumpRef = databaseRef.child('SMF01/actuator/pump');
     _fetchDeviceStates();
+
+    _ledDataSubscription = database.child('SMF01/actuator/led').onValue.listen(
+      (DatabaseEvent event) async {
+        _fetchDeviceStates();
+        setState(() {});
+      },
+    );
+
+    _pumpDataSubscription = database.child('SMF01/actuator/pump').onValue.listen(
+      (DatabaseEvent event) async {
+        _fetchDeviceStates();
+        setState(() {});
+      },
+    );
   }
 
   void _fetchDeviceStates() async {
@@ -37,11 +57,11 @@ class _ToggleRealtimeState extends State<ToggleRealtime> {
     }
   }
 
-  void toggleWaterPumpStatus() async{
+  void toggleWaterPumpStatus() async {
     num newStatus;
-    if(waterPumpStatus == 1){
+    if (waterPumpStatus == 1) {
       newStatus = 0;
-    }else{
+    } else {
       newStatus = 1;
     }
     await databaseRef.child('SMF01/actuator/pump').set(newStatus);
@@ -51,11 +71,11 @@ class _ToggleRealtimeState extends State<ToggleRealtime> {
     });
   }
 
-  void toggleEnergyStatus() async{
+  void toggleEnergyStatus() async {
     num newStatus;
-    if(eneryStatus == 1){
+    if (eneryStatus == 1) {
       newStatus = 0;
-    }else{
+    } else {
       newStatus = 1;
     }
     await databaseRef.child('SMF01/actuator/led').set(newStatus);
@@ -98,7 +118,7 @@ class _ToggleRealtimeState extends State<ToggleRealtime> {
                   buttonStatus: waterPumpStatus == 1,
                 ),
               ),
-               InkWell(
+              InkWell(
                 onTap: () {
                   toggleEnergyStatus();
                 },

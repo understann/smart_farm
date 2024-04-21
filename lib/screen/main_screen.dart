@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_farm/bloc/auth_bloc.dart';
-import 'package:smart_farm/components/dropdown_button.dart';
+import 'package:smart_farm/components/custom_dropdown.dart';
 import 'package:smart_farm/components/status_realtime.dart';
 import 'package:smart_farm/components/toggle_realtime.dart';
 import 'package:smart_farm/screen/login_screen.dart';
@@ -35,6 +35,8 @@ class _MainScreenState extends State<MainScreen> {
   String selectedValue = 'green_oak';
   final manualURI = Uri.parse('https://flutter.dev/');
   final documentNames = <String>[];
+    late StreamSubscription<DatabaseEvent> _sensorDataSubscription;
+
 
   void getPlantDocumentNames() async {
     final databaseRef = FirebaseDatabase.instance.ref();
@@ -54,6 +56,16 @@ class _MainScreenState extends State<MainScreen> {
   void initState() {
     super.initState();
     getPlantDocumentNames();
+
+     _sensorDataSubscription = database
+        .child('SMF01/sensor')
+        .onValue
+        .listen((DatabaseEvent event) {
+      setState(() {
+        print('------------------------------');
+      });
+    });
+
 
   }
 
