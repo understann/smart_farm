@@ -31,3 +31,5 @@ flutter pub get
 ```
 flutter run
 ```
+
+![UI structure](./assets/UIStructure.jpeg)
