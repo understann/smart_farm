@@ -1,4 +1,4 @@
-# Smart Farm Flutter App
+# Smart Farm
 
 This repository contains the source code for a Flutter-based smart farming application. This app allows users to monitor real-time sensor data and control actuators.
 
@@ -20,7 +20,7 @@ first build can takes up to 10min
 
 2. **Install Dependencies:**
 ``` bash
-cd smart-farm-app
+cd smart_farm
 flutter pub get
 ```
 3. **Config firebase for each platform:**
