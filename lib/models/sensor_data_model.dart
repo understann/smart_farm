@@ -1,7 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 
 class SensorData {
-  int ec;
+  double ec;
   double humidity;
   int luminousIntensity;
   int ph;
@@ -22,7 +22,7 @@ class SensorData {
   factory SensorData.fromSnapshot(DataSnapshot snapshot) {
     final data = snapshot.value as Map<Object?, Object?>;
     return SensorData(
-      ec: data['EC'] as int,
+      ec: data['EC'] as double,
       humidity: data['humidity'] as double,
       luminousIntensity: data['luminous_intensity'] as int,
       ph: data['pH'] as int,
