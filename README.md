@@ -14,22 +14,21 @@ This repository contains the source code for a Flutter-based smart farming appli
 first build can takes up to 10min
 
 1. **Clone the Repository:**
-```
+``` bash
    git clone [https://github.com/understann/smart_farm.git](https://github.com/understann/smart_farm.git)
 ```
 
 2. **Install Dependencies:**
-```
+``` bash
 cd smart-farm-app
 flutter pub get
-
 ```
 3. **Config firebase for each platform:**
 - https://firebase.google.com/docs/android/setup
 - https://firebase.google.com/docs/ios/setup
 
 4. **run the app :**
-```
+``` bash
 flutter run
 ```
 
