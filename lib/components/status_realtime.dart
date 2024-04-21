@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_farm/components/long_status_box.dart';
@@ -17,7 +19,7 @@ Future<Map<Object?, Object?>> retrievePlantRangeData(String plant) async {
   final plantSnapshot = await databaseRef.child('plant/$plant').get();
 
   final plantData = plantSnapshot.value as Map<Object?, Object?>;
-  print(plantData);
+  print('Plant Data : $plantData');
   return plantData;
 }
 
@@ -40,9 +42,9 @@ class _StatusRealtimeState extends State<StatusRealtime> {
   Color plantStatusColor(String status, num value) {
     final maxValue = valueRange['${status}max'] as num;
     final minValue = valueRange['${status}min'] as num;
-    print('${status} max : ${maxValue}');
-    print(value);
-    print('${status} min : ${minValue}');
+    // print('${status} max : ${maxValue}');
+    // print(value);
+    // print('${status} min : ${minValue}');
     if (value > maxValue) {
       return StatusColors.red.colorValue;
     } else if (value > minValue) {
@@ -56,6 +58,7 @@ class _StatusRealtimeState extends State<StatusRealtime> {
   void initState() {
     getValueRange();
     super.initState();
+
   }
 
   @override
@@ -77,12 +80,13 @@ class _StatusRealtimeState extends State<StatusRealtime> {
                 return SizedBox(
                     height: MediaQuery.of(context).size.height * 0.4,
                     child: const Center(
-                      child:  CircularProgressIndicator(
+                      child: CircularProgressIndicator(
                         color: Color(0xFF47D404),
                       ),
                     ));
               } else if (snapshot.hasError) {
-                print(snapshot.error);
+                print('Snapshot Data ${snapshot.data}');
+                print('Snapshot Error ${snapshot.error}');
                 return Text('Error: ${snapshot.error}');
               } else {
                 final data = snapshot.data!;
@@ -151,8 +155,8 @@ class _StatusRealtimeState extends State<StatusRealtime> {
                             sensorValueUnit: '',
                             sensorLabel: 'PH'),
                         StatusBox(
-                            statusColor: StatusColors.black.colorValue,
-                            sensorValue: '${data.waterLevel}',
+                            statusColor: plantStatusColor('TDS', data.tds),
+                            sensorValue: '${data.tds}',
                             sensorValueUnit: 'ppm',
                             sensorLabel: 'TDS'),
                       ],
@@ -160,9 +164,9 @@ class _StatusRealtimeState extends State<StatusRealtime> {
                     const SizedBox(
                       height: 15,
                     ),
-                    const LongStatusBox(
+                    LongStatusBox(
                       mainLabel: 'Tank Water',
-                      description: 'max 8 litre',
+                      description: 'max ${data.waterLevel} litre',
                     )
                   ],
                 );

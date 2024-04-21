@@ -7,6 +7,7 @@ class SensorData {
   int ph;
   double temperature;
   int waterLevel;
+  int tds;
 
   SensorData({
     required this.ec,
@@ -15,6 +16,7 @@ class SensorData {
     required this.ph,
     required this.temperature,
     required this.waterLevel,
+    required this.tds,
   });
 
   factory SensorData.fromSnapshot(DataSnapshot snapshot) {
@@ -26,6 +28,7 @@ class SensorData {
       ph: data['pH'] as int,
       temperature: data['temperature'] as double,
       waterLevel: data['water_level'] as int,
+      tds: data['TDS'] as int,
     );
   }
 }

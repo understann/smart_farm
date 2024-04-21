@@ -1,24 +1,31 @@
+import 'dart:collection';
+import 'dart:ffi';
+
 class PlantData {
   double ecMax;
   double ecMin;
-  double humiditymax;
-  double humiditymin;
-  double luxmax;
-  double luxmin;
-  double pHmax;
-  double pHmin;
-  double tempmax;
-  double tempmin;
+  double tdsMax;
+  double tdsMin;
+  double humidityMax;
+  double humidityMin;
+  double luxMax;
+  double luxMin;
+  double pHMax;
+  double pHMin;
+  double tempMax;
+  double tempMin;
 
   PlantData(
       {required this.ecMax,
       required this.ecMin,
-      required this.humiditymax,
-      required this.humiditymin,
-      required this.luxmax,
-      required this.luxmin,
-      required this.pHmax,
-      required this.pHmin,
-      required this.tempmax,
-      required this.tempmin});
+      required this.tdsMax,
+      required this.tdsMin,
+      required this.humidityMax,
+      required this.humidityMin,
+      required this.luxMax,
+      required this.luxMin,
+      required this.pHMax,
+      required this.pHMin,
+      required this.tempMax,
+      required this.tempMin});
 }
