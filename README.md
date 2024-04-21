@@ -14,8 +14,9 @@ This repository contains the source code for a Flutter-based smart farming appli
 first build can takes up to 10min
 
 1. **Clone the Repository:**
-   ```bash
-   git clone [https://github.com/your-username/smart-farm-app.git](https://github.com/your-username/smart-farm-app.git)
+```
+   git clone [https://github.com/understann/smart_farm.git](https://github.com/understann/smart_farm.git)
+```
 
 2. **Install Dependencies:**
 ```
@@ -32,4 +33,5 @@ flutter pub get
 flutter run
 ```
 
+## App UI Structure
 ![UI structure](./assets/UIStructure.jpeg)
