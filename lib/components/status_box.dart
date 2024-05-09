@@ -47,7 +47,7 @@ class StatusBox extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
@@ -55,7 +55,7 @@ class StatusBox extends StatelessWidget {
                             Text(
                               sensorValue,
                               style: const TextStyle(
-                                  fontSize: 26,
+                                  fontSize: 22,
                                   fontWeight: FontWeight.w800,
                                   color: Color(0xFF1B4139)),
                             ),

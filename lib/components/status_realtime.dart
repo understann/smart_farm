@@ -128,7 +128,7 @@ class _StatusRealtimeState extends State<StatusRealtime> {
                       ],
                     ),
                     const SizedBox(
-                      height: 15,
+                      height: 10,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -147,7 +147,7 @@ class _StatusRealtimeState extends State<StatusRealtime> {
                       ],
                     ),
                     const SizedBox(
-                      height: 15,
+                      height: 10,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -165,7 +165,7 @@ class _StatusRealtimeState extends State<StatusRealtime> {
                       ],
                     ),
                     const SizedBox(
-                      height: 15,
+                      height: 10,
                     ),
                     LongStatusBox(
                       mainLabel: 'Tank Water',
