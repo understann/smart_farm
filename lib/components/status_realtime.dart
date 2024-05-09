@@ -122,7 +122,7 @@ class _StatusRealtimeState extends State<StatusRealtime> {
                         StatusBox(
                             statusColor:
                                 plantStatusColor('humidity', data.humidity),
-                            sensorValue: '${data.humidity}%',
+                            sensorValue: '${data.humidity.toStringAsFixed(2)}%',
                             sensorValueUnit: '',
                             sensorLabel: 'Humidity')
                       ],
@@ -135,13 +135,13 @@ class _StatusRealtimeState extends State<StatusRealtime> {
                       children: [
                         StatusBox(
                             statusColor: plantStatusColor('EC', data.ec),
-                            sensorValue: '${data.ec}',
+                            sensorValue: '${data.ec.toStringAsFixed(2)}',
                             sensorValueUnit: 'mS/cm',
                             sensorLabel: 'EC'),
                         StatusBox(
                             statusColor:
                                 plantStatusColor('lux', data.luminousIntensity),
-                            sensorValue: '${data.luminousIntensity}',
+                            sensorValue: '${data.luminousIntensity.toStringAsFixed(2)}',
                             sensorValueUnit: 'Lux',
                             sensorLabel: 'light intensity'),
                       ],
@@ -159,7 +159,7 @@ class _StatusRealtimeState extends State<StatusRealtime> {
                             sensorLabel: 'PH'),
                         StatusBox(
                             statusColor: plantStatusColor('TDS', data.tds),
-                            sensorValue: '${data.tds}',
+                            sensorValue: '${data.tds.toStringAsFixed(1)}',
                             sensorValueUnit: 'ppm',
                             sensorLabel: 'TDS'),
                       ],
